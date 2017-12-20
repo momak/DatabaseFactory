@@ -12,7 +12,14 @@ namespace DatabaseTest
         {
 
             ComicsManager manager = new ComicsManager();
-            manager.GetComics();
+            List<Comics> lstComicses = manager.Select(null);
+
+            foreach (Comics comics in lstComicses)
+            {
+                Console.WriteLine(comics.ToString());
+            }
+
+            Console.ReadLine();
         }
     }
 }

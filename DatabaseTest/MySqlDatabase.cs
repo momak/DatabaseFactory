@@ -52,5 +52,17 @@ namespace DatabaseTest
         {
             return new MySqlParameter(parameterName, parameterValue);
         }
+        public override IDataParameter AddWithValue<T>(IDbCommand command, string name, T value)
+        {
+            IDataParameter parameter = command.CreateParameter();
+            parameter.ParameterName = name;
+            parameter.Value = value;
+            return parameter;
+        }
+
+        public override IList<IDataParameter> AddWithValue<T>(IDbCommand command, Dictionary<string, object> dictionary)
+        {
+            return dictionary.Select(d => AddWithValue(command, d.Key, d.Value)).ToList();
+        }
     }
 }

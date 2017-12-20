@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace DatabaseFactory
 {
@@ -12,6 +13,8 @@ namespace DatabaseFactory
         public abstract IDbCommand CreateCommand(string commandText, IDbConnection connection);
         public abstract IDbCommand CreateStoredProcCommand(string procName, IDbConnection connection);
         public abstract IDataParameter CreateParameter(string parameterName, object parameterValue);
+        public abstract IDataParameter AddWithValue<T>(IDbCommand command, string name, T value);
+        public abstract IList<IDataParameter> AddWithValue<T>(IDbCommand command, Dictionary<string, object> dictionary);
         #endregion
     }
 }
